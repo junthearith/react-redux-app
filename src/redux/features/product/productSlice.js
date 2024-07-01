@@ -3,6 +3,7 @@ import { BASE_URL } from "../../api/baseUrl";
 
 const initialState = {
     products: [],
+    product: {},
     // idle -> |pending|fulfill|rejected|
     status: "idle",
     error: null
@@ -12,9 +13,17 @@ const initialState = {
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
     const response = await fetch(`${BASE_URL}products`);
     const data = await response.json();
-    console.log("data: ", data.results);
+    console.log("data1: ", data.results);
     return data.results;
-})
+});
+
+// fetch product by id
+export const fetchProductById = createAsyncThunk("products/fetchProductById", async (id) => {
+    const response = await fetch(`${BASE_URL}products/${id}`);
+    const data = await response.json();
+    console.log("data2: ", data);
+    return data;
+});
 
 export const productSlice = createSlice({
     name: 'product',
@@ -33,9 +42,21 @@ export const productSlice = createSlice({
             state.status = "failed",
             state.error = action.error.message;
         })
+        .addCase(fetchProductById.pending, (state) => {
+            state.status = "loading";
+        })
+        .addCase(fetchProductById.fulfilled, (state, action) => {
+            state.status = "success",
+            state.product = action.payload;
+        })
+        .addCase(fetchProductById.rejected, (state, action) => {
+            state.status = "failed",
+            state.error = action.error.message;
+        })
     }
 });
 
 // export reducer
 export default productSlice.reducer;
 export const selectAllProducts = ((state) => state.product.products);
+export const selectProductById = ((state) => state.product.product);

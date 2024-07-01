@@ -29,6 +29,7 @@ function App() {
           image={product.image}
           title={product.name}
           price={product.price}
+          id = {product.id}
         />
         );
       })}

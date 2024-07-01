@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import About from "./pages/AboutComponent.jsx";
 import { Counter } from "./pages/counter/Counter.jsx";
+import ProductDetail from "./pages/product-detail/ProductDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <App />
+        element: <ProductDetail />
       }
     ],
   },
