@@ -9,8 +9,9 @@ import { ProductCard } from "./components/common/cards/ProductCard";
 
 function App() {
   const products = useSelector(selectAllProducts);
+  // const products = selectAllProducts;
   const dispatch = useDispatch();
-  // console.log("products: ", products);
+  console.log("products: ", products);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -20,7 +21,7 @@ function App() {
       <h1 className="text-2xl text-blue-800 font-semibold text-center">
         Our Product
       </h1>
-      <section className="grid grid-cols-4 gap-4 mx-20 mt-4">
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-20 mt-4">
       {products.map((product, index) => {
         // console.log("map product: ", product);
         return (
@@ -29,7 +30,9 @@ function App() {
           image={product.image}
           title={product.name}
           price={product.price}
+          desc={product.desc}
           id = {product.id}
+          qty={1}
         />
         );
       })}

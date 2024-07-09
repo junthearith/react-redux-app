@@ -9,6 +9,7 @@ import { store } from "./redux/store.js";
 import About from "./pages/AboutComponent.jsx";
 import { Counter } from "./pages/counter/Counter.jsx";
 import ProductDetail from "./pages/product-detail/ProductDetail.jsx";
+import { Cart } from "./pages/cart/Cart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductDetail />
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       }
     ],
   },
